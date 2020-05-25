@@ -1,0 +1,31 @@
+<div *ngIf="user.role.internalIdentifier == roleIdentifiers.Auditor; else noPermission">
+<table class="table" id="audit-table"  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Role</th>
+        <th>LoggedIn Date Time</th>
+        <th>LoggedOut Date Time</th>
+        <th>ClientIP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let audit of audits">
+        <td>{{ audit.id }}</td>
+        <td>{{ audit.loggedInUser.username }}</td>
+        <td>{{ audit.loggedInUser.firstName }}</td>
+        <td>{{ audit.loggedInUser.lastName }}</td>
+        <td>{{ audit.loggedInUser.role.displayName }}</td>
+        <td>{{ audit.loggedInDateTime | date:'yyyy-MM-dd hh:mm'}}</td>
+        <td>{{ audit.loggedOutDateTime | date:'yyyy-MM-dd hh:mm'}}</td>
+        <td>{{ audit.clientIp}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noPermission>
+  <p style="color: red;">You do not have permission to access this page</p>
+</ng-template>
